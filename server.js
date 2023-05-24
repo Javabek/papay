@@ -1,9 +1,12 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const http = require("http");
 const mongodb = require("mongodb");
 const { log } = require("console");
 
 let db;
-const connectionString = "mongodb+srv://javabek1203:javabek1203@cluster0.zplrjvz.mongodb.net/Reja"
+const connectionString = process.env.MONGO_URL
 
 mongodb.connect(connectionString, {
     useNewUrlParser: true,
