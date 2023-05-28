@@ -8,6 +8,7 @@ const { log } = require("console");
 let db;
 const connectionString = process.env.MONGO_URL
 
+mongoose.set('strictQuery', false);
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -21,10 +22,11 @@ mongoose.connect(connectionString, {
             module.exports = goose;
             const app = require("./app");
             const server = http.createServer(app);
-            let PORT = process.env.PORT || 3000;
+            let PORT = process.env.PORT || 3003;
             server.listen(PORT, function () {
                 console.log(`The server is running successfully on port ${PORT}, http://localhost:${PORT}`);
             })
         }
-    })
+    });
+
     
