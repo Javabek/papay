@@ -1,6 +1,6 @@
 let memberController = module.exports;
 
-const Member = require("../models/Member")
+const Member = require("../models/Member");
 
 
 memberController.signup = async (req, res) => {
@@ -14,7 +14,7 @@ memberController.signup = async (req, res) => {
     } catch (err) {
         console.log(`Error, cont/signup, ${err.message}`);
     }
-}
+};
 
 memberController.login = async (req, res) => {
     try {
@@ -26,10 +26,11 @@ memberController.login = async (req, res) => {
         res.json({ state: "succeed", data: result })
     } catch (err) {
         console.log(`Error, cont/login, ${err.message}`);
+        res.json({ state: "failed", message: err.message })
     }
-}
+};
 
 memberController.logout = (req, res) => {
     console.log("GET cont.logout");
     res.send("logout sahifadasiz")
-}
+};

@@ -8,7 +8,7 @@ const memberSchema = new mongoose.Schema({
         index: { unique: true, sparse: true }
     },
     mb_phone: {
-        type: Number,
+        type: String,
         required: true,
     },
     mb_password: {
