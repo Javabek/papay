@@ -1,12 +1,12 @@
 const Definer = require("../lib/mistake");
-const MemberModel = require("../schema/member.model")
-
+const MemberModel = require("../schema/member.model");
+const assert = require("assert");
 class Member {
-    constructor(){
+    constructor() {
         this.memberModel = MemberModel;
     }
 
-    async signupData(input){
+    async signupData(input) {
         try {
             const new_member = this.memberModel(input);
 
@@ -24,6 +24,30 @@ class Member {
             throw error
         }
     }
+
+    async loginData(input) {
+        try {
+            const member = await this.memberModel
+            .findOne(
+                {mb_nick: input.mb_nick},
+                {mb_nick: 1, mb_password:1})
+            .exec();
+
+            assert.ok(member, Definer.auth_err3)
+
+            const isMatch = input.mb_password === member.mb_password;
+            assert.ok(isMatch, Definer.auth_err4);
+
+            return await this.memberModel
+            .findOne({mb_nick : input.mb_nick}).exec();
+
+            console.log("member:::", member);
+        } catch (err) {
+            throw err;
+        }
+
+    }
+
 }
 
 module.exports = Member;
