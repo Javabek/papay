@@ -18,7 +18,6 @@ mongoose.connect(connectionString, {
             console.log("Error on connection to MongoDb");
         } else {
             console.log("Database ga muvaffa1iyatli ulandi");
-            // console.log(goose);
             module.exports = goose;
             const app = require("./app");
             const server = http.createServer(app);
