@@ -1,14 +1,16 @@
 const Member = require("../models/Member");
+const Product = require("../models/Product");
 let restaurantController = module.exports;
 
-restaurantController.getMyRestaurantData = async (req, res) => {
+restaurantController.getMyRestaurantProducts = async (req, res) => {
   try {
-    console.log("Get: cont/getMyRestaurantData");
-    //TODO: get my restaruant products
+    console.log("Get: cont/getMyRestaurantProducts");
+    const product = new Product();
+    const data = await product.getAllProductsDateResto(res.locals.member);
 
-    res.render("restaruant-menu");
+    res.render("restaruant-menu", { restaurant_data: data });
   } catch (err) {
-    console.log(`Error: cont/getSignUpMyRestaurant, ${err.message}`);
+    console.log(`Error: cont/getMyRestaurantProducts, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
@@ -77,7 +79,7 @@ restaurantController.validateAuthRestaurant = (req, res, next) => {
   } else {
     res.json({
       state: "fail",
-      message: "only authenticated members with restaurant type",
+      message: "only authenticated members with restaurant type"
     });
   }
 };
