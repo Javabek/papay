@@ -1,29 +1,29 @@
 const Member = require("../models/Member");
-let restaruantController = module.exports;
+let restaurantController = module.exports;
 
-restaruantController.getMyRestaruantData = async (req, res) => {
+restaurantController.getMyRestaurantData = async (req, res) => {
   try {
-    console.log("Get: cont/getMyRestaruantData");
+    console.log("Get: cont/getMyRestaurantData");
     //TODO: get my restaruant products
 
     res.render("restaruant-menu");
   } catch (err) {
-    console.log(`Error: cont/getSignUpMyRestaruant, ${err.message}`);
+    console.log(`Error: cont/getSignUpMyRestaurant, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
 
-restaruantController.getSignUpMyRestaruant = async (req, res) => {
+restaurantController.getSignUpMyRestaurant = async (req, res) => {
   try {
-    console.log("Get: cont/getSignUpMyRestaruant");
+    console.log("Get: cont/getSignUpMyRestaurant");
     res.render("signup");
   } catch (error) {
-    console.log(`Error: cont/getSignUpMyRestaruant, ${error.message}`);
+    console.log(`Error: cont/getSignUpMyRestaurant, ${error.message}`);
     res.json({ state: "fail", message: error.message });
   }
 };
 
-restaruantController.signupProcess = async (req, res) => {
+restaurantController.signupProcess = async (req, res) => {
   try {
     console.log("Post: cont/signup");
     const data = req.body,
@@ -38,7 +38,7 @@ restaruantController.signupProcess = async (req, res) => {
   }
 };
 
-restaruantController.getLoginMyRestaruant = async (req, res) => {
+restaurantController.getLoginMyRestaurant = async (req, res) => {
   try {
     console.log("Get: cont/getLoginMyRestaruant");
     res.render("login-page");
@@ -48,7 +48,7 @@ restaruantController.getLoginMyRestaruant = async (req, res) => {
   }
 };
 
-restaruantController.loginProcess = async (req, res) => {
+restaurantController.loginProcess = async (req, res) => {
   try {
     console.log("Post: cont/login");
     const data = req.body,
@@ -61,28 +61,28 @@ restaruantController.loginProcess = async (req, res) => {
     });
   } catch (err) {
     console.log(`Error, cont/login, ${err.message}`);
-    res.json({ state: "failed", message: err.message });
+    res.json({ state: "fail", message: err.message });
   }
 };
 
-restaruantController.logout = (req, res) => {
+restaurantController.logout = (req, res) => {
   console.log("GET cont.logout");
   res.send("logout sahifadasiz");
 };
 
-restaruantController.validateAuthRestaruant = (req, res, next) => {
+restaurantController.validateAuthRestaurant = (req, res, next) => {
   if (req.session?.member?.mb_type === "RESTAURANT") {
     req.member = req.session.member;
     next();
   } else {
     res.json({
       state: "fail",
-      message: "only authenticated members with restaruant type",
+      message: "only authenticated members with restaurant type",
     });
   }
 };
 
-restaruantController.checkSessions = (req, res) => {
+restaurantController.checkSessions = (req, res) => {
   if (req.session?.member) {
     res.json({ state: "succeed", data: req.session.member });
   } else {
