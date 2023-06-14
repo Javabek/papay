@@ -2,6 +2,16 @@ const Member = require("../models/Member");
 const Product = require("../models/Product");
 let restaurantController = module.exports;
 
+
+restaurantController.home = async (req,res) => {
+  try {
+    console.log("Get: cont/home");
+    res.render("home-page");
+  } catch (error) {
+    console.log(`Error: cont/home, ${error.message}`);
+    res.json({ state: "fail", message: error.message });
+  }
+}
 restaurantController.getMyRestaurantProducts = async (req, res) => {
   try {
     console.log("Get: cont/getMyRestaurantProducts");
