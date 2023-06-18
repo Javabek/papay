@@ -14,7 +14,7 @@
       <div class="login_top">
         <span>Ro'yxatdan o'tish</span>
         <div>
-          Bosh sahifaga qaytish<a href="/resto" style="color: #6440fb">Home</a>
+          Bosh sahifaga qaytish <a href="/resto" style="color: #6440fb">Home</a>
         </div>
         <p>
           Ro'yxatdan allaqachon o'tganmisiz?
@@ -107,14 +107,13 @@
 
     </div>
   </form>
-</body>
 <script>
   $(function() {
     let fileTarget = $('.filebox .upload-hidden');
     let filename = '';
     fileTarget.on('change', function() {
       if(window.FileReader) {
-        const uploading_file = $(this) [0].files[0];
+        const uploading_file = $(this)[0].files[0];
         const fileType = uploading_file['type'];
         const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
         if(!validImageTypes.includes(fileType)) {
@@ -156,5 +155,6 @@
       return true;    // test qilganda hamisha false bulmasa backendga zapros yuboradi
     }
   </script>
+</body>
 
 <%- include('includes/footer') %>

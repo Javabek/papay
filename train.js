@@ -1,17 +1,17 @@
 //taskF
-function findDigits(params) {
-  const arr = [];
-  for (let i = 0; i < params.length; i++) {
-   const num = params[i];
-   if(!isNaN(num)){
-    arr.push(num)
-   }
-  }
-  const result = arr.join("");
-  console.log(result);
-}
+// function findDigits(params) {
+//   const arr = [];
+//   for (let i = 0; i < params.length; i++) {
+//    const num = params[i];
+//    if(!isNaN(num)){
+//     arr.push(num)
+//    }
+//   }
+//   const result = arr.join("");
+//   console.log(result);
+// }
 
-findDigits("675jva1203");
+// findDigits("675jva1203");
 
 
 // //challenge6
