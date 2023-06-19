@@ -19,7 +19,7 @@ restaurantController.getMyRestaurantProducts = async (req, res) => {
     const product = new Product();
     const data = await product.getAllProductsDateResto(res.locals.member);
 
-    res.render("restaruant-menu", { restaurant_data: data });
+    res.render("restaurant-menu", { restaurant_data: data });
   } catch (err) {
     console.log(`Error: cont/getMyRestaurantProducts, ${err.message}`);
     res.json({ state: "fail", message: err.message });
@@ -91,14 +91,13 @@ restaurantController.loginProcess = async (req, res) => {
 restaurantController.logout = (req, res) => {
   try {
     console.log("GET cont/logout");
-    req.session.destroy(function(){
-      res.redirect("/resto")
-    })
+    req.session.destroy(function () {
+      res.redirect("/resto");
+    });
   } catch (err) {
     console.log(`Error, cont/logout, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
- 
 };
 
 restaurantController.validateAuthRestaurant = (req, res, next) => {

@@ -46,8 +46,6 @@ class Member {
 
             return await this.memberModel
                 .findOne({ mb_nick: input.mb_nick }).exec();
-
-            console.log("member:::", member);
         } catch (err) {
             throw err;
         }
