@@ -1,4 +1,5 @@
 const Member = require("../models/Member");
+const Restaurant = require("../models/Restaurant");
 const Product = require("../models/Product");
 let restaurantController = module.exports;
 const assert = require("assert");
@@ -79,7 +80,7 @@ restaurantController.loginProcess = async (req, res) => {
     req.session.member = result;
     req.session.save(function () {
       result.mb_type === "ADMIN"
-        ? res.redirect("resto/all-restaurant")
+        ? res.redirect("/resto/all-restaurant")
         : res.redirect("/resto/products/menu");
     });
   } catch (err) {
@@ -119,3 +120,30 @@ restaurantController.checkSessions = (req, res) => {
     res.json({ state: "fail", message: "You are not authenticated" });
   }
 };
+
+restaurantController.validateAdmin = (req, res, next) => {
+  if (req.session?.member?.mb_type === "ADMIN") {
+    req.member = req.session.member;
+    next();
+  } else {
+   const html = `<script>
+   alert("ADMIN page permission denied")
+   window.location.replace("/resto")
+   </script>`
+   res.end(html)
+  }
+};
+
+restaurantController.getAllRestaurants = async (req,res) => {
+  try {
+    console.log("Post: cont/getAllRestaurants");
+
+const restaurant = new Restaurant();
+const restaurants_data = await restaurant.getAllRestaurantsData();
+
+    res.render("all-restaurants", {restaurants_data : restaurants_data})
+  } catch (err) {
+    console.log(`Error, cont/getAllRestaurants, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+}
