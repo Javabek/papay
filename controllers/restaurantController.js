@@ -126,24 +126,36 @@ restaurantController.validateAdmin = (req, res, next) => {
     req.member = req.session.member;
     next();
   } else {
-   const html = `<script>
+    const html = `<script>
    alert("ADMIN page permission denied")
    window.location.replace("/resto")
-   </script>`
-   res.end(html)
+   </script>`;
+    res.end(html);
   }
 };
 
-restaurantController.getAllRestaurants = async (req,res) => {
+restaurantController.getAllRestaurants = async (req, res) => {
   try {
     console.log("Post: cont/getAllRestaurants");
 
-const restaurant = new Restaurant();
-const restaurants_data = await restaurant.getAllRestaurantsData();
+    const restaurant = new Restaurant();
+    const restaurants_data = await restaurant.getAllRestaurantsData();
 
-    res.render("all-restaurants", {restaurants_data : restaurants_data})
+    res.render("all-restaurants", { restaurants_data: restaurants_data });
   } catch (err) {
     console.log(`Error, cont/getAllRestaurants, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-}
+};
+
+restaurantController.updaterestaurantByAdmin = async (req, res) => {
+  try {
+    console.log("Post: cont/updaterestaurantByAdmin");
+    const restaurant = new Restaurant();
+    const result = await restaurant.updaterestaurantByAdminData(req.body);
+    await res.json({state: "success", data: result})
+  } catch (err) {
+    console.log(`Error, cont/updaterestaurantByAdmin, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};
