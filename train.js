@@ -1,4 +1,6 @@
 //taskF
+
+
 // function findDigits(params) {
 //   const arr = [];
 //   for (let i = 0; i < params.length; i++) {
